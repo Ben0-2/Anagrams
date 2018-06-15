@@ -23,23 +23,59 @@ void findAnagrams() {
 			String a = sn.nextLine();
 			if(a.equals(s)) {
 				b=true;
+				
 			}
 			
 		}
+		
 		if(!b) {
 			System.out.println("Try a different word next time!");
 			System.exit(0);
 		}
+		sn = new Scanner(new File("jakepaul.txt"));
 		char[] i = s.toCharArray();
-		for(char c: i) {
-			while(b && sn.hasNextLine()) {
-				String o = sn.nextLine();
-				char[] j = o.toCharArray();
-				if(i == j) {
-					System.out.println(o);
+		
+		boolean b2 = false;
+		boolean b3 = true;
+		while(sn.hasNextLine()) {
+			String o = sn.nextLine();
+			char[]j = o.toCharArray();
+			if(o.length() == s.length()) {
+			for(int k = 0; k<i.length; k++) {
+				for(int c = 0; c<j.length; c++) {
+					if(i[k] == j[c]) {
+						i[k]  = '6';
+						j[c]= i[k];
+					}
 				}
 			}
+			
+			System.out.println(i);
+			System.out.println(j);
+			for(char c2: i) {
+				for(char c3: j) {
+					if(c2 != c3) {
+						b3 = false;
+					}
+				}
+			}
+			if(b3) {
+				System.out.println(o + " is an anagram for " + s + "!");
+				b2 = true;
+			}
+			}
+			
+			
+			
+			
+			i = s.toCharArray();
+			
+			
 		}
+		if(!b2) {
+			System.out.println("No anagrams for " + s + ". Sorry!");
+		}
+		
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
